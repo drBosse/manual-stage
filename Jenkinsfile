@@ -2,7 +2,8 @@ def doRelease = 1
 
 node {
     stage('Promote?') {
-        currentBuild.description = $(git describe --tags)
+        sh 'git describe --tags > describe.txt'
+        currentBuild.description = readFile 'describe.txt'
         try {
             input 'Release'
         }
@@ -14,7 +15,8 @@ node {
     }
     stage('Promote!') {
       if (doRelease > 0) {
-        currentBuild.description = "$(git describe --tags) \nReleased"
+        echo 'Released >> describe.txt'
+        currentBuild.description = readFile 'describe.txt'
       } else {
         echo "not"
       }
