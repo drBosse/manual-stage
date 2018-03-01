@@ -1,6 +1,9 @@
 def doRelease = 1
 
 node {
+    stage('Checkout') {
+      checkout scm
+    }
     stage('Promote?') {
         sh 'git describe --tags > describe.txt'
         currentBuild.description = readFile 'describe.txt'
