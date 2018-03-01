@@ -1,7 +1,7 @@
 node {
     stage('Example') {
         try {
-            Input 'Release'
+            input 'Release'
         }
         catch (exc) {
             echo 'Something failed, I should sound the klaxons!'+exc
