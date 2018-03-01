@@ -1,11 +1,11 @@
 node {
     stage('Example') {
         try {
-            sh 'exit 1'
+            Input 'Release'
         }
         catch (exc) {
-            echo 'Something failed, I should sound the klaxons!'
-            throw
+            echo 'Something failed, I should sound the klaxons!'+exc
+            currentBuild.result = 'SUCCESS'
         }
     }
 }
