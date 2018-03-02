@@ -3,6 +3,7 @@ def doRelease = 1
 node {
     stage('Checkout') {
       checkout scm
+      sh 'git fetch -pt'
     }
     stage('Promote?') {
         sh 'git describe --tags > describe.txt'
