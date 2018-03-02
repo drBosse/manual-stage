@@ -19,7 +19,7 @@ node {
     }
     stage('Promote!') {
       if (doRelease > 0) {
-        echo 'Released >> describe.txt'
+        sh 'echo Released $(git describe --tags) > describe.txt'
         currentBuild.description = readFile 'describe.txt'
       } else {
         echo "not"
