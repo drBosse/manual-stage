@@ -9,11 +9,13 @@ node {
         sh 'git describe --tags > describe.txt'
         currentBuild.description = readFile 'describe.txt'
         try {
+          timeout(time: 15, units: 'MINUTES') {
             input 'Release'
+          }
         }
         catch (exc) {
             echo 'Something failed, I should sound the klaxons!'+exc
-            currentBuild.result = 'SUCCESS'
+            currentBuild.result = 'UNSTABLE'
             doRelease = 0
         }
     }
